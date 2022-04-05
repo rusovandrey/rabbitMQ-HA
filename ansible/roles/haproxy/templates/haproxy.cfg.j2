@@ -1,0 +1,44 @@
+global
+    log                     127.0.0.1 local2
+    chroot                  /var/lib/haproxy
+    pidfile                 /var/run/haproxy.pid
+    user                    haproxy
+    group                   haproxy
+    daemon
+    stats                   socket /var/lib/haproxy/stats
+
+defaults
+    mode                    tcp
+    log                     global
+    timeout queue           1m
+    timeout connect         10s
+    timeout client          60s
+    timeout server          60s
+    timeout check           10s
+    maxconn                 10000
+
+listen stats 0.0.0.0:{{ hap['ports']['stats'] }}
+    mode                    http
+    timeout client          5000
+    timeout connect         4000
+    timeout server          30000
+    stats                   enable
+    stats uri               {{ hap['stats_uri'] }} 
+    stats realm             HAProxy\ Statistics
+    stats auth              {{ hap_user }}:{{ hap_password }}
+    stats admin if          TRUE
+
+frontend rabbitmq
+    bind                    0.0.0.0:{{ hap['ports']['amqp'] }}
+    mode                    tcp
+    default_backend         rabbitmq-nodes
+
+backend rabbitmq-nodes
+    mode                    tcp
+    timeout                 server 3h
+    balance                 {{ hap['balance'] }}
+    stats                   enable
+    option                  tcpka
+{% for item_tmp in groups['rabbitmq'] %}
+    server                  {{ hostvars[item_tmp]['ansible_hostname'] }} {{ hostvars[item_tmp]['ansible_default_ipv4']['address'] }}:{{ rmq['ports']['amqp'] }} {{ hap['server_param'] }}
+{% endfor %}
