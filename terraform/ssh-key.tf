@@ -1,0 +1,4 @@
+resource "openstack_compute_keypair_v2" "key_tf" {
+  name       = "key_tf"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCgjLWBathJiGPW81Oj9kcOjiiSZqnFJSNdKSdmsxZbQLvHS+FAjkO3c2wJLsBGxjUCn7aYlrhOq9jdvPQ6d2ODDxHbgIuh9a47laH5c3hMa8YLkZ8Lia320pktR2ekzyzjJppdzJiG6NW2yeLvXyvu4NeM8z3nZiv2kohDt5sP1nTBFeKhW8/UCe+GPYjheCNbsC7kCRoZVPGEcGT1F1wKUeDhGYhobJ5n0vYzHNMfAq0n/VRH6pTp2sZ3IIxHorIq2MKxR+c4oXSQrZFMGcREi9zIm6+19sYoehVktuNg0YksdXmLyMXzdmU2IB1fioCGUApUD69iVByTqy1fSJH9"
+}
