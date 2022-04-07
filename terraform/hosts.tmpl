@@ -1,0 +1,9 @@
+[master]
+rabbit-mq-1 ansible_host=${rmq1_ip}
+
+[slaves]
+rabbit-mq-2 ansible_host=${rmq2_ip}
+rabbit-mq-3 ansible_host=${rmq3_ip}
+
+[haproxy]
+haproxy ansible_host=${haproxy_ip}

@@ -9,6 +9,9 @@ required_version = ">= 0.14.0"
       source  = "selectel/selectel"
       version = "~> 3.6.2"
    }
+    template = {
+      version = "~> 2.2.0"
+    }
   }
 }
 
