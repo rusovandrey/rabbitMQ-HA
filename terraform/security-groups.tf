@@ -28,7 +28,6 @@ resource "openstack_compute_secgroup_v2" "rmq" {
   }
 }
 
-# Open Apache2 port
 resource "openstack_compute_secgroup_v2" "ssh" {
   name        = "ssh"
   description = "Open input ssh port"
